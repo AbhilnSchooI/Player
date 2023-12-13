@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Player p1 = new Player();
+        System.out.println(p1.toString());
     }
 }
