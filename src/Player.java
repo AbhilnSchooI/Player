@@ -80,7 +80,7 @@ public class Player {
     //Mutators
 
     public void setHp(int hp){
-        if(hp >= 0 %% hp <= 100){
+        if(hp >= 0 && hp <= 100){
             this.hp = hp;
         }
 
@@ -91,22 +91,21 @@ public class Player {
     }
 
     public void move(int direction, int units){
-        if(direction == 1){
-            x = x + units;
-        }else if(direction == 2)){
-            x = x - units;
-        }
-
-        if(direction == 3){
-            y = y + units;
-        }else if(direction == 4)){
-            y = y - units;
-        }
-
-        if(direction == 5){
-            z = z + units;
-        }else if(direction == 6)){
-            z = z - units;
+        if (direction > 0 || direction <= 6) {
+            this.direction = direction;
+            if (direction == 1) {
+                this.x += units;
+            } else if (direction == 2) {
+                this.x -= units;
+            } else if (direction == 3) {
+                this.y += units;
+            } else if (direction == 4) {
+                this.y -= units;
+            } else if (direction == 5) {
+                this.z += units;
+            } else if (direction == 6) {
+                this.z -= units;
+            }
         }
     }
 
@@ -115,11 +114,24 @@ public class Player {
         this.y = y;
         this.z = z;
     }
-
-    public void teleport(Player player){
-        int x = player.getX();
-        int y = player.getYy()
+    public void attack(Player player, int damage) {
+        this.hp += (damage/2);
+        player.setHp(player.getHp() - damage);
+    }
+    //other methods
+    public double getDistance(int x, int y, int z) {
+        double xDistance = x - getX();
+        double yDistance = y - getY();
+        double zDistance = z - getZ();
+        double distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2) + Math.pow(zDistance, 2));
+        return distance;
     }
 
-
+    public double getDistance(Player Player) {
+        double xDistance = Player.getX() - getX();
+        double yDistance = Player.getX() - getY();
+        double zDistance = Player.getX() - getZ();
+        double distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2) + Math.pow(zDistance, 2));
+        return distance;
+    }
 }
